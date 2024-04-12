@@ -1,4 +1,4 @@
-import 'package:ecommerce_app_flutter/src/app.dart';
+  import 'package:ecommerce_app_flutter/src/app.dart';
 import 'package:ecommerce_app_flutter/src/localization/string_hardcoded.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
