@@ -7,6 +7,7 @@ import 'package:ecommerce_app_flutter/src/features/sign_in/string_validators.dar
 import 'package:ecommerce_app_flutter/src/localization/string_hardcoded.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:go_router/go_router.dart';
 
 /// Email & password sign in screen.
 /// Wraps the [EmailPasswordSignInContents] widget below with a [Scaffold] and
@@ -25,7 +26,7 @@ class EmailPasswordSignInScreen extends StatelessWidget {
       appBar: AppBar(title: Text('Sign In'.hardcoded)),
       body: EmailPasswordSignInContents(
         formType: formType,
-        onSignedIn: () => Navigator.of(context).pop(),
+        onSignedIn: () => context.pop(),
       ),
     );
   }

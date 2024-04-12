@@ -1,5 +1,5 @@
-import 'package:ecommerce_app_flutter/src/features/products_list/products_list_screen.dart';
 import 'package:ecommerce_app_flutter/src/localization/string_hardcoded.dart';
+import 'package:ecommerce_app_flutter/src/routing/app_router.dart';
 import 'package:flutter/material.dart';
 
 class MyApp extends StatelessWidget {
@@ -7,10 +7,10 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
+    return MaterialApp.router(
       debugShowCheckedModeBanner: false,
+      routerConfig: goRouter,
       restorationScopeId: 'app',
-      home: const ProductsListScreen(),
       onGenerateTitle: (BuildContext context) => 'Shop'.hardcoded,
       theme: ThemeData(
         // * Use this to toggle Material 3 (defaults to true since Flutter 3.16)

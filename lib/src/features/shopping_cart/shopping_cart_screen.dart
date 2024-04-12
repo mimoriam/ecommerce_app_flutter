@@ -1,10 +1,11 @@
 import 'package:ecommerce_app_flutter/src/common/primary_button.dart';
-import 'package:ecommerce_app_flutter/src/features/checkout/checkout_screen.dart';
 import 'package:ecommerce_app_flutter/src/features/shopping_cart/shopping_cart_item.dart';
 import 'package:ecommerce_app_flutter/src/features/shopping_cart/shopping_cart_items_builder.dart';
 import 'package:ecommerce_app_flutter/src/localization/string_hardcoded.dart';
 import 'package:ecommerce_app_flutter/src/models/item.dart';
+import 'package:ecommerce_app_flutter/src/routing/app_router.dart';
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
 
 /// Shopping cart screen showing the items in the cart (with editable
 /// quantities) and a button to checkout.
@@ -40,12 +41,7 @@ class ShoppingCartScreen extends StatelessWidget {
         ),
         ctaBuilder: (_) => PrimaryButton(
           text: 'Checkout'.hardcoded,
-          onPressed: () => Navigator.of(context).push(
-            MaterialPageRoute(
-              fullscreenDialog: true,
-              builder: (_) => const CheckoutScreen(),
-            ),
-          ),
+          onPressed: () => context.goNamed(AppRoute.checkout.name),
         ),
       ),
     );
