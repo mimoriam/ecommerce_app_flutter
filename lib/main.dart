@@ -1,3 +1,4 @@
+import 'package:ecommerce_app_flutter/src/localization/string_hardcoded.dart';
 import 'package:flutter/material.dart';
 
 void main() async {
@@ -13,8 +14,10 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       restorationScopeId: 'app',
-      home: Container(),
-      onGenerateTitle: (BuildContext context) => 'Shop',
+      home: const SafeArea(
+        child: Text("hello"),
+      ),
+      onGenerateTitle: (BuildContext context) => 'Shop'.hardcoded,
       theme: ThemeData(
         // * Use this to toggle Material 3 (defaults to true since Flutter 3.16)
         useMaterial3: true,
