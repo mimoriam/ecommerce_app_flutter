@@ -1,4 +1,4 @@
-import 'package:ecommerce_app_flutter/src/models/product.dart';
+import 'package:ecommerce_app_flutter/src/features/products/domain/product.dart';
 
 /// Test products to be used until a data source is implemented
 const kTestProducts = [
