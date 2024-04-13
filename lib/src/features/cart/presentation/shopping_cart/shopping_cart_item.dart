@@ -6,6 +6,7 @@ import 'package:ecommerce_app_flutter/src/common/item_quantity_selector.dart';
 import 'package:ecommerce_app_flutter/src/common/responsive_two_column_layout.dart';
 import 'package:ecommerce_app_flutter/src/constants/app_sizes.dart';
 import 'package:ecommerce_app_flutter/src/constants/test_products.dart';
+import 'package:ecommerce_app_flutter/src/features/products/data/fake_products_repository.dart';
 import 'package:ecommerce_app_flutter/src/localization/string_hardcoded.dart';
 import 'package:ecommerce_app_flutter/src/features/cart/domain/item.dart';
 import 'package:ecommerce_app_flutter/src/features/products/domain/product.dart';
@@ -31,7 +32,8 @@ class ShoppingCartItem extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     // TODO: Read from data source
-    final product = kTestProducts.firstWhere((product) => product.id == item.productId);
+    // final product = kTestProducts.firstWhere((product) => product.id == item.productId);
+    final product = FakeProductsRepository.instance.getProduct(item.productId)!;
     return Padding(
       padding: const EdgeInsets.symmetric(vertical: Sizes.p8),
       child: Card(

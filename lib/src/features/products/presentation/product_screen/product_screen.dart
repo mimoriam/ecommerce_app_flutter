@@ -5,6 +5,7 @@ import 'package:ecommerce_app_flutter/src/common/responsive_two_column_layout.da
 import 'package:ecommerce_app_flutter/src/constants/app_sizes.dart';
 import 'package:ecommerce_app_flutter/src/constants/test_products.dart';
 import 'package:ecommerce_app_flutter/src/features/cart/presentation/add_to_cart/add_to_cart_widget.dart';
+import 'package:ecommerce_app_flutter/src/features/products/data/fake_products_repository.dart';
 import 'package:ecommerce_app_flutter/src/features/products/presentation/product_screen/leave_review_action.dart';
 import 'package:ecommerce_app_flutter/src/features/products/presentation/product_screen/product_average_rating.dart';
 import 'package:ecommerce_app_flutter/src/features/reviews/presentation/product_reviews/product_reviews_list.dart';
@@ -22,7 +23,8 @@ class ProductScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     // TODO: Read from data source
-    final product = kTestProducts.firstWhere((product) => product.id == productId);
+    // final product = kTestProducts.firstWhere((product) => product.id == productId);
+    final product = FakeProductsRepository.instance.getProduct(productId);
     return Scaffold(
       appBar: const HomeAppBar(),
       body: product == null
