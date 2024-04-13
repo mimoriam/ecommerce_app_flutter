@@ -2,6 +2,7 @@ import 'package:ecommerce_app_flutter/src/app.dart';
 import 'package:ecommerce_app_flutter/src/localization/string_hardcoded.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_web_plugins/url_strategy.dart';
 
 void main() async {
@@ -9,7 +10,9 @@ void main() async {
   // turn off the # in the URLs on the web
   usePathUrlStrategy();
   registerErrorHandlers();
-  runApp(const MyApp());
+  runApp(const ProviderScope(
+    child: MyApp(),
+  ));
 }
 
 // * https://docs.flutter.dev/testing/errors
