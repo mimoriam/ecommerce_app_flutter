@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:ecommerce_app_flutter/src/constants/test_products.dart';
 import 'package:ecommerce_app_flutter/src/features/products/domain/product.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -44,6 +46,11 @@ final productsListFutureProvider = FutureProvider.autoDispose<List<Product>>((re
 });
 
 final productProvider = StreamProvider.autoDispose.family<Product?, String>((ref, id) {
+  // Keep connection open for 10s after user leaves the page:
+  final link = ref.keepAlive();
+  Timer(const Duration(seconds: 10), () {
+    link.close();
+  });
   final productsRepository = ref.watch(productsRepositoryProvider);
   return productsRepository.watchProduct(id);
 });
