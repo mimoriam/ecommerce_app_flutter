@@ -1,44 +1,47 @@
 import 'dart:math';
 
+import 'package:ecommerce_app_flutter/src/common/async_value_widget.dart';
 import 'package:ecommerce_app_flutter/src/constants/app_sizes.dart';
-import 'package:ecommerce_app_flutter/src/constants/test_products.dart';
 import 'package:ecommerce_app_flutter/src/features/products/data/fake_products_repository.dart';
+import 'package:ecommerce_app_flutter/src/features/products/domain/product.dart';
 import 'package:ecommerce_app_flutter/src/features/products/presentation/products_list/product_card.dart';
 import 'package:ecommerce_app_flutter/src/localization/string_hardcoded.dart';
 import 'package:ecommerce_app_flutter/src/routing/app_router.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_layout_grid/flutter_layout_grid.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 
 /// A widget that displays the list of products that match the search query.
-class ProductsGrid extends StatelessWidget {
+class ProductsGrid extends ConsumerWidget {
   const ProductsGrid({super.key});
 
   @override
-  Widget build(BuildContext context) {
-    // TODO: Read from data source
-    // const products = kTestProducts;
-    final products = FakeProductsRepository.instance.getProductsList();
-    return products.isEmpty
-        ? Center(
-            child: Text(
-              'No products found'.hardcoded,
-              style: Theme.of(context).textTheme.headlineMedium,
+  Widget build(BuildContext context, WidgetRef ref) {
+    final productsListValue = ref.watch(productsListStreamProvider);
+    return AsyncValueWidget<List<Product>>(
+      value: productsListValue,
+      data: (products) => products.isEmpty
+          ? Center(
+              child: Text(
+                'No products found'.hardcoded,
+                style: Theme.of(context).textTheme.headlineMedium,
+              ),
+            )
+          : ProductsLayoutGrid(
+              itemCount: products.length,
+              itemBuilder: (_, index) {
+                final product = products[index];
+                return ProductCard(
+                  product: product,
+                  onPressed: () => context.goNamed(
+                    AppRoute.product.name,
+                    pathParameters: {'id': product.id},
+                  ),
+                );
+              },
             ),
-          )
-        : ProductsLayoutGrid(
-            itemCount: products.length,
-            itemBuilder: (_, index) {
-              final product = products[index];
-              return ProductCard(
-                product: product,
-                onPressed: () => context.goNamed(
-                  AppRoute.product.name,
-                  pathParameters: {'id': product.id},
-                ),
-              );
-            },
-          );
+    );
   }
 }
 
